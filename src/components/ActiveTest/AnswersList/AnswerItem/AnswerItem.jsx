@@ -6,26 +6,26 @@ const StyledAnswerItem = styled.li`
   border-radius: 5px;
   padding: 5px;
   margin-bottom: 10px;
-
-  cursor: pointer;
   &:hover {
     background: rgba(255, 255, 255, 0.2);
     transition: 0.3s ease-in-out;
   }
+  background-color: transparent;
 `;
-
 const AnswerItem = (props) => {
-  const style = [StyledAnswerItem]
+  const cls = [StyledAnswerItem];
 
   if (props.state) {
-    style.push(styled[props.state])
+    cls.push(styled[props.state]);
   }
 
   return (
     <StyledAnswerItem>
-      <p onClick={() => props.onAnswerClick(props.answer.id)}>
-        {props.answer.text}
-      </p>
+      <div className={cls.join(' ')}>
+        <p onClick={() => props.onAnswerClick(props.answer.id)}>
+          {props.answer.text}
+        </p>
+      </div>
     </StyledAnswerItem>
   );
 };

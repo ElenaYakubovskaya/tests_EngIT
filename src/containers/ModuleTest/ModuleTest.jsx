@@ -27,7 +27,8 @@ const StyledModuleTest = styled.div`
 
 class ModuleTest extends Component {
   state = {
-    isFinished: true,
+    results: {},
+    isFinished: false,
     activeQuestion: 0,
     answerState: null,
     test: [
@@ -51,6 +52,7 @@ class ModuleTest extends Component {
           { text: 'Are', id: 3 },
         ],
       },
+
       {
         question: ' I have a lot of _______',
         rightAnswerId: 1,
@@ -222,6 +224,7 @@ class ModuleTest extends Component {
           { text: 'Keep', id: 3 },
         ],
       },
+
       {
         question: `Create synonym pairs:
           1. Wrap up     a. Achieve
@@ -243,16 +246,22 @@ class ModuleTest extends Component {
   onAnswerClickHandler = (answerId) => {
     if (this.state.answerState) {
       const key = Object.keys(this.state.answerState)[0];
-      if (this.state.answerState[key] === 'succes') {
+      if (this.state.answerState[key] === 'success') {
         return;
       }
     }
 
     const question = this.state.test[this.state.activeQuestion];
+    const results = this.state.results;
 
     if (question.rightAnswerId === answerId) {
+      if (!results[question.id]) {
+        results[question.id] = 'success';
+      }
+
       this.setState({
         answerState: { [answerId]: 'success' },
+        results,
       });
 
       const timeout = window.setTimeout(() => {
@@ -263,20 +272,32 @@ class ModuleTest extends Component {
         } else {
           this.setState({
             activeQuestion: this.state.activeQuestion + 1,
+            answerState: null,
           });
         }
-
         window.clearTimeout(timeout);
       }, 50);
     } else {
+      results[question.id] = 'error';
       this.setState({
         answerState: { [answerId]: 'error' },
+        results,
       });
     }
   };
+
   isModuleFinished() {
     return this.state.activeQuestion + 1 === this.state.test.length;
   }
+
+  retryHandler = () => {
+    this.setState({
+      activeQuestion: 0,
+      answerState: null,
+      results: {},
+      isFinished: false,
+    });
+  };
 
   render() {
     return (
@@ -285,7 +306,11 @@ class ModuleTest extends Component {
           <div className="title">
             English for IT<p>Module tests</p>
             {this.state.isFinished ? (
-              <FinishedModuleTest />
+              <FinishedModuleTest
+                results={this.state.results}
+                test={this.state.test}
+                onRetry={this.retryHandler}
+              />
             ) : (
               <ActiveTest
                 answers={this.state.test[this.state.activeQuestion].answers}
