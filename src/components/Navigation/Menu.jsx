@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 const StyledMenu = styled.nav`
   z-index: 50;
@@ -35,9 +36,24 @@ const StyledMenu = styled.nav`
 const Menu = ({ open }) => {
   return (
     <StyledMenu open={open}>
-      <a href="/">Module 1-4</a>
-      <a href="/">Module 4-8</a>
-      <a href="/">Module 9-12</a>
+      <a href="/">
+        <span role="img" aria-label="about us">
+          💁🏻‍♂️
+        </span>
+        About us
+      </a>
+      <a href="/">
+        <span role="img" aria-label="price">
+          💸
+        </span>
+        Pricing
+      </a>
+      <a href="/">
+        <span role="img" aria-label="contact">
+          📩
+        </span>
+        Contact
+      </a>
     </StyledMenu>
   );
 };

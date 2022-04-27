@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import Burger from '../../components/Navigation/Burger';
 import Menu from '../../components/Navigation/Menu';
+import { Link, Outlet } from 'react-router-dom';
+import ModuleTest from '../../containers/ModuleTest/ModuleTest';
 
 const StyledLayout = styled.div`
   height: 100vh;
@@ -22,11 +24,14 @@ const Layout = () => {
 
   return (
     <StyledLayout>
-      <div ref={node}>
-        <Burger open={open} setOpen={setOpen} />
-        <Menu open={open} setOpen={setOpen} />
-
-        <main>тут должен быть moduletest</main>
+      <Link to={'/'}>
+        <div ref={node}>
+          <Burger open={open} setOpen={setOpen} />
+          <Menu open={open} setOpen={setOpen} />
+        </div>
+      </Link>
+      <div>
+        <ModuleTest />
       </div>
     </StyledLayout>
   );

@@ -1,13 +1,9 @@
 import React from 'react';
-import Layout from './hoc/Layout/Layout';
-import ModuleTest from './containers/ModuleTest/ModuleTest';
+
+import RootRouter from './components/RootRouter/RootRouter';
 
 function App() {
-  return (
-    <Layout>
-      <ModuleTest />
-    </Layout>
-  );
+  return <RootRouter />;
 }
 
 export default App;
