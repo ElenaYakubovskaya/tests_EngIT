@@ -11,12 +11,13 @@ const StyleFinishedModuleTest = styled.div`
   color: #ffffff;
 
   box-sizing: border-box;
-  margin: 20px 10px;
+  margin: 10px 10px;
 
   .image {
-    margin-left: 170px;
+    margin-left: 180px;
     width: 170px;
     height: 100px;
+    margin-bottom: 40px;
   }
 
   div {
@@ -62,6 +63,7 @@ const FinishedModuleTest = (props) => {
             Total: {successCount}/{props.test.length}
           </p>
           <Button onClick={props.onRetry}>repeat</Button>
+          <Button>test list</Button>
         </div>
       </div>
     </StyleFinishedModuleTest>

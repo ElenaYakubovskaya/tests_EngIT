@@ -4,7 +4,8 @@ import styled, { css } from 'styled-components';
 const StyleButton = styled.button`
   display: inline-block;
   padding: 5px 20px;
-  margin-left: 100px;
+  margin-left: 30px;
+  margin-right: 10px;
   border-radius: 4px;
   border: 1px solid #ccc;
   color: black;
