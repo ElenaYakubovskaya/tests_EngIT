@@ -22,6 +22,6 @@ const app = (
   </>
 );
 
-ReactDOM.render(app, document.getElementById('root'));
+ReactDOM.createRoot(document.getElementById('root')).render(app);
 
 export default GlobalStyle;

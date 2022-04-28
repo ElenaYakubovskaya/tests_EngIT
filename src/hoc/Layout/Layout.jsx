@@ -3,13 +3,13 @@ import styled from 'styled-components';
 import Burger from '../../components/Navigation/Burger';
 import Menu from '../../components/Navigation/Menu';
 import { Link, Outlet } from 'react-router-dom';
-import ModuleTest from '../../containers/ModuleTest/ModuleTest';
 
 const StyledLayout = styled.div`
   height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  background: linear-gradient(90deg, #922e83 0%, #eccaca 100%);
 
   main {
     display: flex;
@@ -31,7 +31,7 @@ const Layout = () => {
         </div>
       </Link>
       <div>
-        <ModuleTest />
+        <Outlet />
       </div>
     </StyledLayout>
   );

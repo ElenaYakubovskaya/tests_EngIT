@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Button from '../../../../UI/Button';
 import image_cat from '../images/cat.png';
+import { Link } from 'react-router-dom';
 
 const StyleFinishedModuleTest = styled.div`
   max-height: 100vh;
@@ -57,13 +58,13 @@ const FinishedModuleTest = (props) => {
   return (
     <StyleFinishedModuleTest>
       <div>
-        <img className="image" src={image_cat} />
+        <img className="image" alt="IT_cat" src={image_cat} />
         <div className="total-button">
           <p>
             Total: {successCount}/{props.test.length}
           </p>
           <Button onClick={props.onRetry}>repeat</Button>
-          <Button>test list</Button>
+          <Link to={'/'}>test list</Link>
         </div>
       </div>
     </StyleFinishedModuleTest>
