@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Burger from '../../components/Navigation/Burger';
 import Menu from '../../components/Navigation/Menu';
-import { Link, Outlet } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 
 const StyledLayout = styled.div`
   height: 100vh;
@@ -24,12 +24,10 @@ const Layout = () => {
 
   return (
     <StyledLayout>
-      <Link to={'/'}>
-        <div ref={node}>
-          <Burger open={open} setOpen={setOpen} />
-          <Menu open={open} setOpen={setOpen} />
-        </div>
-      </Link>
+      <div ref={node}>
+        <Burger open={open} setOpen={setOpen} />
+        <Menu open={open} setOpen={setOpen} />
+      </div>
       <div>
         <Outlet />
       </div>

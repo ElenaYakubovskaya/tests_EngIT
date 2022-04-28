@@ -13,7 +13,7 @@ const StyledModuleTest = styled.div`
     justify-content: center;
     height: 100vh;
     width: 100%;
-    background: linear-gradient(90deg, #922e83 0%, #eccaca 100%);
+
     flex-grow: initial;
   }
 
