@@ -299,6 +299,10 @@ class ModuleTest extends Component {
     });
   };
 
+  componentDidMount() {
+    console.log(',jhf');
+  }
+
   render() {
     return (
       <StyledModuleTest>

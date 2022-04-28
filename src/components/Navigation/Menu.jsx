@@ -7,7 +7,7 @@ const StyledMenu = styled.nav`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background: #feb8fa;
+  background: #f4c1e8;
   transform: ${({ open }) => (open ? 'translateX(0)' : 'translateX(-100%)')};
   height: 100vh;
   text-align: left;
@@ -17,29 +17,51 @@ const StyledMenu = styled.nav`
   left: 0;
   transition: transform 0.3s ease-in-out;
 
-  a {
-    font-size: 2rem;
+  p {
+    padding: 25px 50px;
     text-transform: uppercase;
-    padding: 2rem 0;
-    font-weight: bold;
-    letter-spacing: 0.5rem;
-    color: #71085e;
     text-decoration: none;
-    transition: color 0.3s linear;
-
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 1.7rem;
     &:hover {
-      color: #ffffff;
+      color: #6a016a;
+      text-decoration: underline;
     }
   }
 `;
 
-const Menu = ({ open }) => {
+const Menu = ({ open, setOpen }) => {
   return (
     <StyledMenu open={open}>
-      <Link to={'/list'}>Test List</Link>
-      <Link to={'auth'}>Sign in</Link>
-      <Link to={'creator'}>Test creator</Link>
-      <Link to={'test:id'}>Module 1-4</Link>
+      <Link
+        style={{ textDecoration: 'none' }}
+        onClick={() => setOpen(!open)}
+        to={'/list'}
+      >
+        <p>Test List</p>
+      </Link>
+      <Link
+        style={{ textDecoration: 'none' }}
+        onClick={() => setOpen(!open)}
+        to={'auth'}
+      >
+        <p>Sign in</p>
+      </Link>
+      <Link
+        style={{ textDecoration: 'none' }}
+        onClick={() => setOpen(!open)}
+        to={'creator'}
+      >
+        <p>Test creator</p>
+      </Link>
+      <Link
+        style={{ textDecoration: 'none' }}
+        onClick={() => setOpen(!open)}
+        to={'/1-4'}
+      >
+        <p>Module 1-4</p>
+      </Link>
     </StyledMenu>
   );
 };

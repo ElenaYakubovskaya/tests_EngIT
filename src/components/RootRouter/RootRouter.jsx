@@ -12,10 +12,14 @@ const RootRouter = () => {
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route path="/list" element={<TestList />} />
-        <Route path="/test:id/finished" element={<FinishedModuleTest />} />
+        <Route
+          path="/test:id/finished"
+          exact
+          element={<FinishedModuleTest />}
+        />
 
         <Route path="/auth" element={<Auth />} />
-        <Route path="/test:id" element={<ModuleTest />} />
+        <Route path="/1-4" element={<ModuleTest />} />
         <Route path="/creator" element={<TestCreator />} />
       </Route>
     </Routes>
