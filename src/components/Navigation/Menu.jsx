@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import image_cat from '../../images/cat.png';
 
 const StyledMenu = styled.nav`
   z-index: 50;
@@ -29,15 +30,22 @@ const StyledMenu = styled.nav`
       text-decoration: underline;
     }
   }
+
+  img {
+    width: 55%;
+    height: 10%;
+    margin: 0 auto 50px;
+  }
 `;
 
 const Menu = ({ open, setOpen }) => {
   return (
     <StyledMenu open={open}>
+      <img alt="IT_cat" src={image_cat} />
       <Link
         style={{ textDecoration: 'none' }}
         onClick={() => setOpen(!open)}
-        to={'/list'}
+        to={'/'}
       >
         <p>Test List</p>
       </Link>

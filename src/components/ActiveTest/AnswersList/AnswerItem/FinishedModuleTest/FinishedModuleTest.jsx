@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Button from '../../../../UI/Button';
-import image_cat from '../images/cat.png';
+import image_cat from '../../../../../images/cat.png';
 import { Link } from 'react-router-dom';
 
 const StyleFinishedModuleTest = styled.div`
@@ -63,8 +63,13 @@ const FinishedModuleTest = (props) => {
           <p>
             Total: {successCount}/{props.test.length}
           </p>
-          <Button onClick={props.onRetry}>repeat</Button>
-          <Link to={'/'}>test list</Link>
+          <Link style={{ textDecoration: 'none' }} to={'/1-4'}>
+            <Button onClick={props.onRetry}>repeat</Button>
+          </Link>
+
+          <Link style={{ textDecoration: 'none' }} to={'/'}>
+            <Button>test list</Button>
+          </Link>
         </div>
       </div>
     </StyleFinishedModuleTest>

@@ -4,8 +4,11 @@ import { Link } from 'react-router-dom';
 
 const StyleTestList = styled.div`
   display: flex;
-  align-items: center;
+
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
   padding: 20px;
   flex-grow: 1;
   width: 100%;
@@ -27,6 +30,12 @@ const StyleTestList = styled.div`
     padding: 0;
   }
 
+  li {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+  }
+
   span {
     text-decoration: none;
     margin-top: 10px;
@@ -46,18 +55,17 @@ export default class TestList extends Component {
         <StyleTestList>
           <li key={index}>
             <Link style={{ textDecoration: 'none' }} exact to={'test_' + test}>
-              <span>Module {test}</span>
+              <span> Module {test}</span>
             </Link>
           </li>
         </StyleTestList>
       );
     });
   }
-
   render() {
     return (
       <StyleTestList>
-        <p>List of tests</p>
+        <p>List of modules</p>
 
         <ul>{this.renderTests()}</ul>
       </StyleTestList>

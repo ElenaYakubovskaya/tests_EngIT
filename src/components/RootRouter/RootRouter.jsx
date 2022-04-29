@@ -11,7 +11,7 @@ const RootRouter = () => {
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
-        <Route path="/list" element={<TestList />} />
+        <Route path="/" element={<TestList />} />
         <Route
           path="/test:id/finished"
           exact
