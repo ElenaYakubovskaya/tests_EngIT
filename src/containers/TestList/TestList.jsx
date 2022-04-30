@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 const StyleTestList = styled.div`
   display: flex;
@@ -52,9 +53,9 @@ export default class TestList extends Component {
   renderTests() {
     return ['1-4', '4-8', '9-12'].map((test, index) => {
       return (
-        <StyleTestList>
-          <li key={index}>
-            <Link style={{ textDecoration: 'none' }} exact to={'test_' + test}>
+        <StyleTestList key={index}>
+          <li>
+            <Link style={{ textDecoration: 'none' }} to={'test_' + test}>
               <span> Module {test}</span>
             </Link>
           </li>
@@ -62,6 +63,17 @@ export default class TestList extends Component {
       );
     });
   }
+
+  componentDidMount() {
+    axios
+      .get(
+        'https://tests-english4it-default-rtdb.europe-west1.firebasedatabase.app/w.json'
+      )
+      .then((response) => {
+        console.log(response);
+      });
+  }
+
   render() {
     return (
       <StyleTestList>

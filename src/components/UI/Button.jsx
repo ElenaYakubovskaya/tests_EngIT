@@ -1,5 +1,5 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 const StyleButton = styled.button`
   display: inline-block;
@@ -13,9 +13,11 @@ const StyleButton = styled.button`
   text-transform: uppercase;
   font-weight: bold;
   font-size: 12px;
+  background-color: ${(props) =>
+    props.bg === '#a11e75' ? '#a11e75' : 'white'};
 
   &:hover {
-    box-shadow: inset 1px 1px 1px rgba(0, 0, 0, 0.3);
+    box-shadow: inset 1px 2px 5px rgba(0, 0, 0, 0.3);
   }
   &:focus {
     outline: none;
@@ -23,14 +25,6 @@ const StyleButton = styled.button`
   &:active {
     box-shadow: inset 4px 4px 2px rgba(0, 0, 0, 0.3);
   }
-
-  ${(props) =>
-    props.disabled &&
-    css`
-      cursor: not-allowed;
-      color: red;
-      backgroundcolor: #ff0404;
-    `}
 `;
 
 const Button = (props) => {

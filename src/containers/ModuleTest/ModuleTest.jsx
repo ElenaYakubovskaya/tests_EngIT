@@ -224,20 +224,54 @@ class ModuleTest extends Component {
           { text: 'Keep', id: 3 },
         ],
       },
-
       {
-        question: `Create synonym pairs:
-          1. Wrap up     a. Achieve
-          2. Elaborate   b. Explain in more detail
-          3. Go over     c. Spend time with someone
-          4. Hang out    d. Finish
-          5. Accomplish  e. Discuss`,
-        rightAnswerId: 1,
+        question: 'The synonym of “Wrap up” is:',
+        rightAnswerId: 3,
         id: 20,
         answers: [
-          { text: '1-d, 2-b, 3-e, 4-c, 5-a', id: 1 },
-          { text: '1-a, 2-d, 3-b, 4-c, 5-e', id: 2 },
-          { text: '1-d, 2-a, 3-e, 4-c, 5-b', id: 3 },
+          { text: 'Discuss', id: 1 },
+          { text: 'Spend time with someone', id: 2 },
+          { text: 'Finish', id: 3 },
+        ],
+      },
+      {
+        question: 'The synonym of “Elaborate” is:',
+        rightAnswerId: 1,
+        id: 21,
+        answers: [
+          { text: 'Explain in more detail', id: 1 },
+          { text: 'Finish', id: 2 },
+          { text: 'Achieve', id: 3 },
+        ],
+      },
+      {
+        question: 'The synonym of “Go over” is:',
+        rightAnswerId: 3,
+        id: 22,
+        answers: [
+          { text: 'Finish', id: 1 },
+          { text: 'Spend time with someone', id: 2 },
+          { text: 'Discuss', id: 3 },
+        ],
+      },
+      {
+        question: 'The synonym of “Hang out” is:',
+        rightAnswerId: 2,
+        id: 23,
+        answers: [
+          { text: 'Achieve', id: 1 },
+          { text: 'Spend time with someone', id: 2 },
+          { text: 'Explain in more detail', id: 3 },
+        ],
+      },
+      {
+        question: 'The synonym of “Accomplish” is:',
+        rightAnswerId: 1,
+        id: 24,
+        answers: [
+          { text: 'Achieve', id: 1 },
+          { text: 'Finish', id: 2 },
+          { text: 'Discuss', id: 3 },
         ],
       },
     ],
