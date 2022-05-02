@@ -31,7 +31,7 @@ const StyleAuth = styled.div`
   }
 
   h1 {
-    color: #b0609e;
+    color: #6a0b4d;
     text-align: center;
     text-transform: uppercase;
     margin-bottom: 30px;
@@ -56,7 +56,7 @@ const StyleAuth = styled.div`
     box-sizing: border-box;
     border: 1px solid #bebebe;
     padding: 7px;
-    margin: 0 auto 20px;
+    margin: 0 auto 2px;
     width: 100%;
     outline: none;
     transition: all 300ms ease-in-out;
@@ -159,8 +159,6 @@ export default class Auth extends Component {
   }
 
   onChangeHandler = (event, controlName) => {
-    console.log(`${controlName}:`, event.target.value);
-
     const formControls = { ...this.state.formControls };
     const control = { ...formControls[controlName] };
 
@@ -170,8 +168,15 @@ export default class Auth extends Component {
 
     formControls[controlName] = control;
 
+    let isFormValid = true;
+
+    Object.keys(formControls).forEach((name) => {
+      isFormValid = formControls[name].valid && isFormValid;
+    });
+
     this.setState({
       formControls,
+      isFormValid,
     });
   };
 
@@ -202,10 +207,18 @@ export default class Auth extends Component {
           <form onSubmit={this.submitHandler} className="auth">
             {this.renderInputs()}
             <div className="buttons">
-              <Button type="success" onClick={this.loginHandler}>
+              <Button
+                disabled={!this.state.isFormValid}
+                type="success"
+                onClick={this.loginHandler}
+              >
                 Log in
               </Button>
-              <Button type="primary" onClick={this.registerHandler}>
+              <Button
+                disabled={!this.state.isFormValid}
+                type="primary"
+                onClick={this.registerHandler}
+              >
                 Sign in
               </Button>
             </div>

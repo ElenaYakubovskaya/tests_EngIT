@@ -9,13 +9,15 @@ const StyleInput = styled.div`
     padding: 0;
     display: block;
     font-weight: bold;
-    color: ${(props) => (props.invalid === 'invalid' ? 'red' : 'white')};
+    color: #6a0b4d;
   }
 
   input {
+    font-size: 1.2em;
     display: block;
     box-sizing: border-box;
     border: 1px solid #bebebe;
+
     margin: 5px 0 0;
     width: 100%;
     outline: none;
@@ -47,7 +49,7 @@ const Input = (props) => {
         onChange={props.onChange}
       ></input>
       {isInvalid(props) ? (
-        <span>{props.errorMessage || 'введите правильное значение'}</span>
+        <span>{props.errorMessage || 'enter valid value'}</span>
       ) : null}
     </StyleInput>
   );

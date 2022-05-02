@@ -13,8 +13,6 @@ const StyleButton = styled.button`
   text-transform: uppercase;
   font-weight: bold;
   font-size: 12px;
-  background-color: ${(props) =>
-    props.bg === '#a11e75' ? '#a11e75' : 'white'};
 
   &:hover {
     box-shadow: inset 1px 2px 5px rgba(0, 0, 0, 0.3);
@@ -25,10 +23,21 @@ const StyleButton = styled.button`
   &:active {
     box-shadow: inset 4px 4px 2px rgba(0, 0, 0, 0.3);
   }
+
+  &:disabled {
+    color: #ea4b53;
+    background: #fff;
+    cursor: not-allowed;
+    opacity: 0.4;
+  }
 `;
 
 const Button = (props) => {
-  return <StyleButton onClick={props.onClick}>{props.children}</StyleButton>;
+  return (
+    <StyleButton disabled={props.disabled} onClick={props.onClick}>
+      {props.children}
+    </StyleButton>
+  );
 };
 
 export default Button;

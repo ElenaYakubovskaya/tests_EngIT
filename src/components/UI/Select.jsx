@@ -9,6 +9,7 @@ const StyleSelect = styled.div`
     padding: 0;
     font-weight: bold;
     display: block;
+    color: #6a0b4d;
   }
 
   select {

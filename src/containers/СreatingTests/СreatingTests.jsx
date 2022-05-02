@@ -4,7 +4,7 @@ import Input from '../../components/UI/Input';
 import Button from '../../components/UI/Button';
 import Select from '../../components/UI/Select';
 
-import { createControl } from '../../form/MainForm';
+import { createControl, validate, validateForm } from '../../form/MainForm';
 
 const StyleСreatingTests = styled.div`
   display: flex;
@@ -21,7 +21,7 @@ const StyleСreatingTests = styled.div`
   h1 {
     text-align: center;
     margin-bottom: 30px;
-    color: white;
+    color: #ffffff;
   }
 
   form {
@@ -30,13 +30,25 @@ const StyleСreatingTests = styled.div`
     padding: 15px;
     box-shadow: 2px 2px 2px rgba(0 0 0 0.5);
   }
+
+  input {
+    display: block;
+    box-sizing: border-box;
+    border: 1px solid #bebebe;
+    padding: 7px;
+    margin: 0 auto 2px;
+    width: 100%;
+    outline: none;
+    transition: all 300ms ease-in-out;
+    font-size: 1.2rem;
+  }
 `;
 
 function createOptionControl(number) {
   return createControl(
     {
-      label: `answer ${number} `,
-      errorMesage: 'This value cannot be empty',
+      label: `answer ${number}: `,
+      errorMessage: 'This value cannot be empty',
       id: number,
     },
     { required: true }
@@ -47,7 +59,7 @@ function createFormControls() {
   return {
     question: createControl(
       {
-        label: 'Question',
+        label: 'Question:',
         errorMesage: 'Question cannot be empty',
       },
       { required: true }
@@ -61,6 +73,7 @@ function createFormControls() {
 export default class СreatingTests extends Component {
   state = {
     test: [],
+    isFormValid: false,
     rightAnswerId: 1,
     formControls: createFormControls(),
   };
@@ -69,11 +82,54 @@ export default class СreatingTests extends Component {
     event.preventDefault();
   };
 
-  addQuestionHandler = () => {};
+  addQuestionHandler = (event) => {
+    event.preventDefault();
 
-  createTestHandler = () => {};
+    const test = this.state.test.concat();
+    const index = test.length + 1;
 
-  changeHandler = (value, controlName) => {};
+    const { question, option1, option2, option3 } = this.state.formControls;
+
+    const questionItem = {
+      question: question.value,
+      id: index,
+      rightAnswerId: this.state.rightAnswerId,
+      answers: [
+        { text: option1.value, id: option1.id },
+        { text: option2.value, id: option2.id },
+        { text: option3.value, id: option3.id },
+      ],
+    };
+    test.push(questionItem);
+
+    this.setState({
+      test,
+      isFormValid: false,
+      rightAnswerId: 1,
+      formControls: createFormControls(),
+    });
+  };
+
+  createTestHandler = (event) => {
+    event.preventDefault();
+    console.log(this.state.test);
+  };
+
+  changeHandler = (value, controlName) => {
+    const formControls = { ...this.state.formControls };
+    const control = { ...formControls[controlName] };
+
+    control.touched = true;
+    control.value = value;
+    control.valid = validate(control.value, control.validation);
+
+    formControls[controlName] = control;
+
+    this.setState({
+      formControls,
+      isFormValid: validateForm(formControls),
+    });
+  };
 
   renderControls() {
     return Object.keys(this.state.formControls).map((controlName, index) => {
@@ -106,7 +162,7 @@ export default class СreatingTests extends Component {
   render() {
     const select = (
       <Select
-        label="right answer"
+        label="right answer:"
         value={this.state.rightAnswerId}
         onChange={this.selectChangeHandler}
         options={[
@@ -123,10 +179,18 @@ export default class СreatingTests extends Component {
           <form onSubmit={this.submitHandler}>
             {this.renderControls()}
             {select}
-            <Button type="primary" onClick={this.addQuestionHandler}>
+            <Button
+              type="primary"
+              onClick={this.addQuestionHandler}
+              disabled={!this.state.isFormValid}
+            >
               add question
             </Button>
-            <Button type="success" onClick={this.createTestHandler}>
+            <Button
+              type="success"
+              onClick={this.createTestHandler}
+              disabled={this.state.test.length === 0}
+            >
               creating test
             </Button>
           </form>
