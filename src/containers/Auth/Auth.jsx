@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Button from '../../components/UI/Button';
 import Input from '../../components/UI/Input';
 import is from 'is_js';
+import axios from 'axios';
 
 const StyleAuth = styled.div`
   margin-top: 150px;
@@ -63,43 +64,10 @@ const StyleAuth = styled.div`
     font-size: 1.2rem;
   }
 `;
-/*loginHandler = async () => {
-  const authData = {
-    email: this.state.formControls.email.value,
-    password: this.state.formControls.password.value,
-    returnSecureToken: true,
-  };
-  try {
-    const response = await axios.post(
-      'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCg9Yxtzy4tjbScNosmZOeJBwylj7JdNE4',
-      authData
-    );
-    console.log(response.data);
-  } catch (e) {
-    console.log(e);
-  }
-};
-
-registerHandler = async () => {
-  const authData = {
-    email: this.state.formControls.email.value,
-    password: this.state.formControls.password.value,
-    returnSecureToken: true,
-  };
-  try {
-    const response = await axios.post(
-      'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCg9Yxtzy4tjbScNosmZOeJBwylj7JdNE4',
-      authData
-    );
-    console.log(response.data);
-  } catch (e) {
-    console.log(e);
-  }
-};
-*/
 
 export default class Auth extends Component {
   state = {
+    isFormValid: false,
     formControls: {
       email: {
         value: '',
@@ -128,9 +96,39 @@ export default class Auth extends Component {
     },
   };
 
-  loginHandler = () => {};
+  loginHandler = async () => {
+    const authData = {
+      email: this.state.formControls.email.value,
+      password: this.state.formControls.password.value,
+      returnSecureToken: true,
+    };
+    try {
+      const response = await axios.post(
+        'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCg9Yxtzy4tjbScNosmZOeJBwylj7JdNE4',
+        authData
+      );
+      console.log(response.data);
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
-  registerHandler = () => {};
+  registerHandler = async () => {
+    const authData = {
+      email: this.state.formControls.email.value,
+      password: this.state.formControls.password.value,
+      returnSecureToken: true,
+    };
+    try {
+      const response = await axios.post(
+        'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCg9Yxtzy4tjbScNosmZOeJBwylj7JdNE4',
+        authData
+      );
+      console.log(response.data);
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   submitHandler = (event) => {
     event.preventDefault();

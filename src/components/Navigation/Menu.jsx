@@ -63,13 +63,6 @@ const Menu = ({ open, setOpen }) => {
       >
         <p>Creating tests</p>
       </Link>
-      <Link
-        style={{ textDecoration: 'none' }}
-        onClick={() => setOpen(!open)}
-        to={'/1-4'}
-      >
-        <p>Module 1-4</p>
-      </Link>
     </StyledMenu>
   );
 };

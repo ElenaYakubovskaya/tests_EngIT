@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import axios from '../../axios/axios-test';
 
 const StyleTestList = styled.div`
   display: flex;
@@ -35,6 +35,8 @@ const StyleTestList = styled.div`
     width: 100%;
     display: flex;
     justify-content: flex-start;
+    font-weight: bold;
+    font-size: 1.4em;
   }
 
   span {
@@ -50,13 +52,20 @@ const StyleTestList = styled.div`
   }
 `;
 export default class TestList extends Component {
+  state = {
+    tests: [],
+  };
+
   renderTests() {
-    return ['1-4', '4-8', '9-12'].map((test, index) => {
+    return this.state.tests.map((test) => {
       return (
-        <StyleTestList key={index}>
+        <StyleTestList key={test.id}>
           <li>
-            <Link style={{ textDecoration: 'none' }} to={'test_' + test}>
-              <span> Module {test}</span>
+            <Link
+              style={{ textDecoration: 'none', color: 'white' }}
+              to={'/moduletest/' + test.id}
+            >
+              {test.name}
             </Link>
           </li>
         </StyleTestList>
@@ -64,19 +73,28 @@ export default class TestList extends Component {
     });
   }
 
-  componentDidMount() {
-    axios
-      .get(
-        'https://tests-english4it-default-rtdb.europe-west1.firebasedatabase.app/w.json'
-      )
-      .then((response) => {});
+  async componentDidMount() {
+    try {
+      const response = await axios.get('/tests.json');
+      const tests = [];
+      Object.keys(response.data).forEach((key, index) => {
+        tests.push({
+          id: key,
+          name: `Module №${index + 1}`,
+        });
+      });
+      this.setState({
+        tests: tests,
+      });
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   render() {
     return (
       <StyleTestList>
         <p>List of modules</p>
-
         <ul>{this.renderTests()}</ul>
       </StyleTestList>
     );

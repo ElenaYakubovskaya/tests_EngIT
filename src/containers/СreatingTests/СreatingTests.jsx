@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Input from '../../components/UI/Input';
 import Button from '../../components/UI/Button';
 import Select from '../../components/UI/Select';
+import axios from '../../axios/axios-test';
 
 import { createControl, validate, validateForm } from '../../form/MainForm';
 
@@ -60,7 +61,7 @@ function createFormControls() {
     question: createControl(
       {
         label: 'Question:',
-        errorMesage: 'Question cannot be empty',
+        errorMessage: 'Question cannot be empty',
       },
       { required: true }
     ),
@@ -110,9 +111,20 @@ export default class СreatingTests extends Component {
     });
   };
 
-  createTestHandler = (event) => {
+  createTestHandler = async (event) => {
     event.preventDefault();
-    console.log(this.state.test);
+
+    try {
+      await axios.post('/tests.json', this.state.test);
+      this.setState({
+        test: [],
+        isFormValid: false,
+        rightAnswerId: 1,
+        formControls: createFormControls(),
+      });
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   changeHandler = (value, controlName) => {
