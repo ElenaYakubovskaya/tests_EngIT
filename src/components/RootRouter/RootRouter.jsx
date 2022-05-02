@@ -4,7 +4,7 @@ import ModuleTest from '../../containers/ModuleTest/ModuleTest';
 import Layout from '../../hoc/Layout/Layout';
 import TestList from '../../containers/TestList/TestList';
 import Auth from '../../containers/Auth/Auth';
-import TestCreator from '../../containers/TestCreator/TestCreator';
+import СreatingTests from '../../containers/СreatingTests/СreatingTests';
 import FinishedModuleTest from '../ActiveTest/AnswersList/AnswerItem/FinishedModuleTest/FinishedModuleTest';
 
 const RootRouter = () => {
@@ -20,7 +20,7 @@ const RootRouter = () => {
 
         <Route path="/auth" element={<Auth />} />
         <Route path="/1-4" element={<ModuleTest />} />
-        <Route path="/creator" element={<TestCreator />} />
+        <Route path="/creating" element={<СreatingTests />} />
       </Route>
     </Routes>
   );

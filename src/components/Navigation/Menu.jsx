@@ -59,9 +59,9 @@ const Menu = ({ open, setOpen }) => {
       <Link
         style={{ textDecoration: 'none' }}
         onClick={() => setOpen(!open)}
-        to={'creator'}
+        to={'creating'}
       >
-        <p>Test creator</p>
+        <p>Creating tests</p>
       </Link>
       <Link
         style={{ textDecoration: 'none' }}

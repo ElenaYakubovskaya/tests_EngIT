@@ -69,9 +69,7 @@ export default class TestList extends Component {
       .get(
         'https://tests-english4it-default-rtdb.europe-west1.firebasedatabase.app/w.json'
       )
-      .then((response) => {
-        console.log(response);
-      });
+      .then((response) => {});
   }
 
   render() {
