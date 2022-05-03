@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import axios from '../../axios/axios-test';
+
+import { connect } from 'react-redux';
+import { fetchTests } from '../../store/actions/test';
 
 const StyleTestList = styled.div`
   display: flex;
@@ -51,19 +53,15 @@ const StyleTestList = styled.div`
     }
   }
 `;
-export default class TestList extends Component {
-  state = {
-    tests: [],
-  };
-
+class TestList extends Component {
   renderTests() {
-    return this.state.tests.map((test) => {
+    return this.props.tests.map((test) => {
       return (
         <StyleTestList key={test.id}>
           <li>
             <Link
               style={{ textDecoration: 'none', color: 'white' }}
-              to={'/moduletest/' + test.id}
+              to={'/tests/' + test.id}
             >
               {test.name}
             </Link>
@@ -73,8 +71,9 @@ export default class TestList extends Component {
     });
   }
 
-  async componentDidMount() {
-    try {
+  componentDidMount() {
+    this.props.fetchTests();
+    /*try {
       const response = await axios.get('/tests.json');
       const tests = [];
       Object.keys(response.data).forEach((key, index) => {
@@ -88,7 +87,7 @@ export default class TestList extends Component {
       });
     } catch (e) {
       console.log(e);
-    }
+    }*/
   }
 
   render() {
@@ -100,3 +99,17 @@ export default class TestList extends Component {
     );
   }
 }
+
+function mapStateToProps(state) {
+  return {
+    tests: state.test.tests,
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    fetchTests: () => dispatch(fetchTests()),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(TestList);

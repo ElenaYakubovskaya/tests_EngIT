@@ -13,7 +13,7 @@ const RootRouter = () => {
       <Route path="/" element={<Layout />}>
         <Route path="/" element={<TestList />} />
 
-        <Route path="/moduletest/:id" element={<ModuleTest />} />
+        <Route path="/tests/:id" element={<ModuleTest />} />
         <Route path="/auth" element={<Auth />} />
         <Route path="/creating" element={<СreatingTests />} />
         <Route

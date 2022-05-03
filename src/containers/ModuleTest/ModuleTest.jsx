@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import ActiveTest from '../../components/ActiveTest/ActiveTest';
 import FinishedModuleTest from '../../components/ActiveTest/AnswersList/AnswerItem/FinishedModuleTest/FinishedModuleTest';
-import axios from '../../axios/axios-test';
+
+import { fetchTestById } from '../../store/actions/test';
+import { connect } from 'react-redux';
 
 const StyledModuleTest = styled.div`
   .wrapper {
@@ -25,14 +27,6 @@ const StyledModuleTest = styled.div`
 `;
 
 class ModuleTest extends Component {
-  state = {
-    results: {},
-    isFinished: false,
-    activeQuestion: 0,
-    answerState: null,
-    test: [],
-  };
-
   onAnswerClickHandler = (answerId) => {
     if (this.state.answerState) {
       const key = Object.keys(this.state.answerState)[0];
@@ -42,6 +36,7 @@ class ModuleTest extends Component {
     }
 
     const question = this.state.test[this.state.activeQuestion];
+
     const results = this.state.results;
 
     if (question.rightAnswerId === answerId) {
@@ -90,40 +85,31 @@ class ModuleTest extends Component {
   };
 
   async componentDidMount() {
-    try {
-      const response = await axios.get(
-        `/moduletest/${this.props.match.params.id}.json`
-      );
-      const test = response.data;
-      this.setState({
-        test,
-      });
-    } catch (e) {
-      console.log(e);
-    }
+    this.props.fetchTestById(this.props.match.params.id);
   }
 
   render() {
+    console.log(this.props);
     return (
       <StyledModuleTest>
         <div className="wrapper">
           <div className="title">
             English for IT
             <p>Module tests</p>
-            {this.state.isFinished ? (
+            {this.props.isFinished ? (
               <FinishedModuleTest
-                results={this.state.results}
-                test={this.state.test}
+                results={this.props.results}
+                test={this.props.test}
                 onRetry={this.retryHandler}
               />
             ) : (
               <ActiveTest
-                answers={this.state.test[this.state.activeQuestion].answers}
-                question={this.state.test[this.state.activeQuestion].question}
+                answers={this.props.test[this.props.activeQuestion].answers}
+                question={this.props.test[this.props.activeQuestion].question}
                 onAnswerClick={this.onAnswerClickHandler}
-                testLength={this.state.test.length}
-                answerNumber={this.state.activeQuestion + 1}
-                state={this.state.answerState}
+                testLength={this.props.test.length}
+                answerNumber={this.props.activeQuestion + 1}
+                state={this.props.answerState}
               />
             )}
           </div>
@@ -133,4 +119,20 @@ class ModuleTest extends Component {
   }
 }
 
-export default ModuleTest;
+function mapStateToProps(state) {
+  return {
+    results: state.test.results,
+    isFinished: state.test.isFinished,
+    activeQuestion: state.test.activeQuestion,
+    answerState: state.test.answerState,
+    test: state.test.test,
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    fetchTestById: (id) => dispatch(fetchTestById(id)),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ModuleTest);
