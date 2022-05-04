@@ -55,6 +55,7 @@ const FinishedModuleTest = (props) => {
     }
     return total;
   }, 0);
+
   return (
     <StyleFinishedModuleTest>
       <div>
@@ -63,9 +64,8 @@ const FinishedModuleTest = (props) => {
           <p>
             Total: {successCount}/{props.test.length}
           </p>
-          <Link style={{ textDecoration: 'none' }} to={'/1-4'}>
-            <Button onClick={props.onRetry}>repeat</Button>
-          </Link>
+
+          <Button onClick={props.onRetry}>repeat</Button>
 
           <Link style={{ textDecoration: 'none' }} to={'/'}>
             <Button>test list</Button>

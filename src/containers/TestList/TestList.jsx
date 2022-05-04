@@ -1,17 +1,14 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-
 import { connect } from 'react-redux';
 import { fetchTests } from '../../store/actions/test';
 
 const StyleTestList = styled.div`
   display: flex;
-
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
   padding: 20px;
   flex-grow: 1;
   width: 100%;

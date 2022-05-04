@@ -16,6 +16,8 @@ const AnswerList = (props) => (
       {props.answers.map((answer, index) => {
         return (
           <AnswerItem
+            success={props.success}
+            error={props.error}
             key={index}
             answer={answer}
             onAnswerClick={props.onAnswerClick}

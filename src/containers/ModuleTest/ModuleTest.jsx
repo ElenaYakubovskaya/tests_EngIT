@@ -3,7 +3,11 @@ import styled from 'styled-components';
 import ActiveTest from '../../components/ActiveTest/ActiveTest';
 import FinishedModuleTest from '../../components/ActiveTest/AnswersList/AnswerItem/FinishedModuleTest/FinishedModuleTest';
 
-import { fetchTestById } from '../../store/actions/test';
+import {
+  fetchTestById,
+  testAnswerClick,
+  retryTest,
+} from '../../store/actions/test';
 import { connect } from 'react-redux';
 
 const StyledModuleTest = styled.div`
@@ -24,70 +28,25 @@ const StyledModuleTest = styled.div`
     margin-left: 20px;
     font-size: 1.8em;
   }
+
+  &:success {
+    color: #ffffff8e;
+    background: #12b232;
+  }
+
+  &:error {
+    color: #ffffff8e;
+    background: #d12a2a;
+  }
 `;
 
 class ModuleTest extends Component {
-  onAnswerClickHandler = (answerId) => {
-    if (this.state.answerState) {
-      const key = Object.keys(this.state.answerState)[0];
-      if (this.state.answerState[key] === 'success') {
-        return;
-      }
-    }
-
-    const question = this.state.test[this.state.activeQuestion];
-
-    const results = this.state.results;
-
-    if (question.rightAnswerId === answerId) {
-      if (!results[question.id]) {
-        results[question.id] = 'success';
-      }
-
-      this.setState({
-        answerState: { [answerId]: 'success' },
-        results,
-      });
-
-      const timeout = window.setTimeout(() => {
-        if (this.isModuleFinished()) {
-          this.setState({
-            isFinished: true,
-          });
-        } else {
-          this.setState({
-            activeQuestion: this.state.activeQuestion + 1,
-            answerState: null,
-          });
-        }
-        window.clearTimeout(timeout);
-      }, 50);
-    } else {
-      results[question.id] = 'error';
-      this.setState({
-        answerState: { [answerId]: 'error' },
-        results,
-      });
-    }
-  };
-
-  isModuleFinished() {
-    return this.state.activeQuestion + 1 === this.state.test.length;
+  componentDidMount() {
+    this.props.fetchTestById(this.props.params.id);
   }
-
-  retryHandler = () => {
-    this.setState({
-      activeQuestion: 0,
-      answerState: null,
-      isFinished: false,
-      results: {},
-    });
-  };
-
-  async componentDidMount() {
-    this.props.fetchTestById(this.props.match.params.id);
+  componentWillUnmount() {
+    this.props.retryTest();
   }
-
   render() {
     console.log(this.props);
     return (
@@ -100,13 +59,13 @@ class ModuleTest extends Component {
               <FinishedModuleTest
                 results={this.props.results}
                 test={this.props.test}
-                onRetry={this.retryHandler}
+                onRetry={this.props.retryTest}
               />
             ) : (
               <ActiveTest
                 answers={this.props.test[this.props.activeQuestion].answers}
                 question={this.props.test[this.props.activeQuestion].question}
-                onAnswerClick={this.onAnswerClickHandler}
+                onAnswerClick={this.props.testAnswerClick}
                 testLength={this.props.test.length}
                 answerNumber={this.props.activeQuestion + 1}
                 state={this.props.answerState}
@@ -132,6 +91,8 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     fetchTestById: (id) => dispatch(fetchTestById(id)),
+    testAnswerClick: (answerId) => dispatch(testAnswerClick(answerId)),
+    retryTest: () => dispatch(retryTest()),
   };
 }
 

@@ -3,9 +3,13 @@ import styled from 'styled-components';
 import Input from '../../components/UI/Input';
 import Button from '../../components/UI/Button';
 import Select from '../../components/UI/Select';
-import axios from '../../axios/axios-test';
 
 import { createControl, validate, validateForm } from '../../form/MainForm';
+import {
+  createTestQuestion,
+  finishCreateTest,
+} from '../../store/actions/create';
+import { connect } from 'react-redux';
 
 const StyleСreatingTests = styled.div`
   display: flex;
@@ -71,9 +75,8 @@ function createFormControls() {
   };
 }
 
-export default class СreatingTests extends Component {
+class СreatingTests extends Component {
   state = {
-    test: [],
     isFormValid: false,
     rightAnswerId: 1,
     formControls: createFormControls(),
@@ -86,14 +89,11 @@ export default class СreatingTests extends Component {
   addQuestionHandler = (event) => {
     event.preventDefault();
 
-    const test = this.state.test.concat();
-    const index = test.length + 1;
-
     const { question, option1, option2, option3 } = this.state.formControls;
 
     const questionItem = {
       question: question.value,
-      id: index,
+      id: this.props.test.length + 1,
       rightAnswerId: this.state.rightAnswerId,
       answers: [
         { text: option1.value, id: option1.id },
@@ -101,30 +101,25 @@ export default class СreatingTests extends Component {
         { text: option3.value, id: option3.id },
       ],
     };
-    test.push(questionItem);
+
+    this.props.createTestQuestion(questionItem);
 
     this.setState({
-      test,
       isFormValid: false,
       rightAnswerId: 1,
       formControls: createFormControls(),
     });
   };
 
-  createTestHandler = async (event) => {
+  createTestHandler = (event) => {
     event.preventDefault();
 
-    try {
-      await axios.post('/tests.json', this.state.test);
-      this.setState({
-        test: [],
-        isFormValid: false,
-        rightAnswerId: 1,
-        formControls: createFormControls(),
-      });
-    } catch (e) {
-      console.log(e);
-    }
+    this.setState({
+      isFormValid: false,
+      rightAnswerId: 1,
+      formControls: createFormControls(),
+    });
+    this.props.finishCreateTest();
   };
 
   changeHandler = (value, controlName) => {
@@ -201,7 +196,7 @@ export default class СreatingTests extends Component {
             <Button
               type="success"
               onClick={this.createTestHandler}
-              disabled={this.state.test.length === 0}
+              disabled={this.props.test.length === 0}
             >
               creating test
             </Button>
@@ -211,3 +206,17 @@ export default class СreatingTests extends Component {
     );
   }
 }
+
+function mapStateToProps(state) {
+  return {
+    test: state.create.test,
+  };
+}
+function mapDispatchToProps(dispatch) {
+  return {
+    createTestQuestion: (item) => dispatch(createTestQuestion(item)),
+    finishCreateTest: () => dispatch(finishCreateTest()),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(СreatingTests);
