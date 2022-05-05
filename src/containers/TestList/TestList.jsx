@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchTests } from '../../store/actions/test';
 
-const StyleTestList = styled.div`
+const StyleTestList = styled.li`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -55,14 +55,12 @@ class TestList extends Component {
     return this.props.tests.map((test) => {
       return (
         <StyleTestList key={test.id}>
-          <li>
-            <Link
-              style={{ textDecoration: 'none', color: 'white' }}
-              to={'/tests/' + test.id}
-            >
-              {test.name}
-            </Link>
-          </li>
+          <Link
+            style={{ textDecoration: 'none', color: 'white' }}
+            to={'/test/' + test.id}
+          >
+            {test.name}
+          </Link>
         </StyleTestList>
       );
     });

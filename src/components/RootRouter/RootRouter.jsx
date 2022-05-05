@@ -5,10 +5,11 @@ import Layout from '../../hoc/Layout/Layout';
 import TestList from '../../containers/TestList/TestList';
 import Auth from '../../containers/Auth/Auth';
 import СreatingTests from '../../containers/СreatingTests/СreatingTests';
-import WithRouter from '../../hoc/WithRouter';
+import { WithRouter } from '../../hoc/WithRouter';
 import Logout from '../Logout/Logout';
 import { connect } from 'react-redux';
 import { autoLogin } from '../../store/actions/auth';
+import ModuleTest from '../../containers/ModuleTest/ModuleTest';
 
 class RootRouter extends Component {
   componentDidMount() {
@@ -20,7 +21,7 @@ class RootRouter extends Component {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<TestList />} />
-          <Route path="tests/:id" element={<Auth />} />
+          <Route path="test/:id" element={<Auth />} />
           <Route path="auth" element={<Auth />} />
           <Route path="creating" element={<Auth />} />
           <Route path="logout" element={<Logout />} />
@@ -32,7 +33,7 @@ class RootRouter extends Component {
       routes = (
         <Routes>
           <Route path="/" element={<Layout />}>
-            <Route path="tests/:id" element={<WithRouter />} />
+            <Route path="test/:id" element={<ModuleTest {...this.props} />} />
 
             <Route path="creating" element={<СreatingTests />} />
             <Route path="logout" element={<Logout />} />
@@ -57,4 +58,7 @@ function mapDispatchToProps(dispatch) {
     autoLogin: () => dispatch(autoLogin()),
   };
 }
-export default connect(mapStateToProps, mapDispatchToProps)(RootRouter);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(WithRouter(RootRouter));

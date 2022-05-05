@@ -4,8 +4,8 @@ import {
   FETCH_TESTS_ERROR,
   FETCH_TESTS_START,
   FETCH_TESTS_SUCCESS,
-  TEST_SET_STATE,
   FINISH_TEST,
+  TEST_SET_STATE,
   TEST_NEXT_QUESTION,
   TEST_RETRY,
 } from './actionsTypes';
@@ -16,6 +16,7 @@ export function fetchTests() {
     try {
       const response = await axios.get('/tests.json');
       const tests = [];
+
       Object.keys(response.data).forEach((key, index) => {
         tests.push({
           id: key,
@@ -33,9 +34,11 @@ export function fetchTests() {
 export function fetchTestById(testId) {
   return async (dispatch) => {
     dispatch(fetchTestsStart());
+
     try {
       const response = await axios.get(`/tests/${testId}.json`);
       const test = response.data;
+
       dispatch(fetchTestSuccess(test));
       this.setState({
         test,

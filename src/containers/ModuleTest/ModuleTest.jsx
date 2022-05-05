@@ -9,7 +9,8 @@ import {
   retryTest,
 } from '../../store/actions/test';
 import { connect } from 'react-redux';
-
+import { WithRouter } from '../../hoc/WithRouter';
+import Loader from '../../components/UI/Loader';
 const StyledModuleTest = styled.div`
   .wrapper {
     padding-top: 50px;
@@ -35,7 +36,6 @@ const StyledModuleTest = styled.div`
   }
 
   &:error {
-    color: #ea4b53;
     background: red;
     color: white;
   }
@@ -43,20 +43,21 @@ const StyledModuleTest = styled.div`
 
 class ModuleTest extends Component {
   componentDidMount() {
-    this.props.fetchTestById(this.props.params.id);
+    this.props.fetchTestById(this.props.match.params.id);
   }
   componentWillUnmount() {
     this.props.retryTest();
   }
   render() {
-    console.log(this.props);
     return (
       <StyledModuleTest>
         <div className="wrapper">
           <div className="title">
             English for IT
             <p>Module tests</p>
-            {this.props.isFinished ? (
+            {this.props.loading || !this.props.test ? (
+              <Loader />
+            ) : this.props.isFinished ? (
               <FinishedModuleTest
                 results={this.props.results}
                 test={this.props.test}
@@ -97,4 +98,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ModuleTest);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(WithRouter(ModuleTest));

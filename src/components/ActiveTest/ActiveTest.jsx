@@ -57,8 +57,6 @@ const ActiveTest = (props) => {
           </div>
         </div>
         <AnswerList
-          success={props.success}
-          error={props.error}
           state={props.state}
           answers={props.answers}
           onAnswerClick={props.onAnswerClick}

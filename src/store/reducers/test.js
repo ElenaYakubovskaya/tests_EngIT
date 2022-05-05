@@ -11,6 +11,7 @@ import {
 
 const initialState = {
   tests: [],
+  loading: false,
   error: null,
   results: {},
   isFinished: false,
@@ -24,20 +25,24 @@ export default function testReducer(state = initialState, action) {
     case FETCH_TESTS_START:
       return {
         ...state,
+        loading: true,
       };
     case FETCH_TESTS_SUCCESS:
       return {
         ...state,
+        loading: false,
         tests: action.tests,
       };
     case FETCH_TESTS_ERROR:
       return {
         ...state,
+        loading: false,
         error: action.error,
       };
     case FETCH_TEST_SUCCESS:
       return {
         ...state,
+        loading: false,
         test: action.test,
       };
     case TEST_SET_STATE:

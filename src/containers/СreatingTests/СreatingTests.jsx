@@ -10,6 +10,7 @@ import {
   finishCreateTest,
 } from '../../store/actions/create';
 import { connect } from 'react-redux';
+import Auxiliary from '../../hoc/Auxiliary';
 
 const StyleСreatingTests = styled.div`
   display: flex;
@@ -142,7 +143,7 @@ class СreatingTests extends Component {
     return Object.keys(this.state.formControls).map((controlName, index) => {
       const control = this.state.formControls[controlName];
       return (
-        <div key={controlName + index}>
+        <Auxiliary key={controlName + index}>
           <Input
             label={control.label}
             value={control.value}
@@ -155,7 +156,7 @@ class СreatingTests extends Component {
             }
           />
           {index === 0 ? <hr /> : null}
-        </div>
+        </Auxiliary>
       );
     });
   }
