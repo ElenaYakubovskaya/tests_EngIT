@@ -63,6 +63,13 @@ const Menu = ({ open, setOpen }) => {
       >
         <p>Creating tests</p>
       </Link>
+      <Link
+        style={{ textDecoration: 'none' }}
+        onClick={() => setOpen(!open)}
+        to={'logout'}
+      >
+        <p>Exit</p>
+      </Link>
     </StyledMenu>
   );
 };

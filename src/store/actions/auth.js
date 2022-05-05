@@ -49,6 +49,7 @@ export function logout() {
 }
 
 export function authSuccess(token) {
+  console.log(token);
   return {
     type: AUTH_SUCCESS,
     token,
