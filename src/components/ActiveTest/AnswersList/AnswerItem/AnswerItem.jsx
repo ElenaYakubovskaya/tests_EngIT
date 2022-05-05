@@ -13,19 +13,15 @@ const StyledAnswerItem = styled.li`
   background-color: transparent;
 `;
 const AnswerItem = (props) => {
-  const cls = [StyledAnswerItem];
-
-  if (props.state) {
-    cls.push(styled[props.state]);
-  }
-
   return (
     <StyledAnswerItem>
-      <div className={cls.join(' ')}>
-        <p onClick={() => props.onAnswerClick(props.answer.id)}>
-          {props.answer.text}
-        </p>
-      </div>
+      <p
+        success={props.success}
+        error={props.error}
+        onClick={() => props.onAnswerClick(props.answer.id)}
+      >
+        {props.answer.text}
+      </p>
     </StyledAnswerItem>
   );
 };

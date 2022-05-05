@@ -32,7 +32,7 @@ class Logout extends Component {
   render() {
     return (
       <StyledLogout>
-        <p>Thank you, come again.</p>
+        <p>Thank you, come again&#128578;</p>
         <img alt="IT_cat" src={image_cat} />
         <p>&#8592; &nbsp;Sign in</p>
       </StyledLogout>

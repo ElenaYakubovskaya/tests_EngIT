@@ -70,21 +70,6 @@ class TestList extends Component {
 
   componentDidMount() {
     this.props.fetchTests();
-    /*try {
-      const response = await axios.get('/tests.json');
-      const tests = [];
-      Object.keys(response.data).forEach((key, index) => {
-        tests.push({
-          id: key,
-          name: `Module №${index + 1}`,
-        });
-      });
-      this.setState({
-        tests: tests,
-      });
-    } catch (e) {
-      console.log(e);
-    }*/
   }
 
   render() {

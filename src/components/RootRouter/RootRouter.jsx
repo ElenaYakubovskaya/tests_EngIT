@@ -8,8 +8,13 @@ import СreatingTests from '../../containers/СreatingTests/СreatingTests';
 import WithRouter from '../../hoc/WithRouter';
 import Logout from '../Logout/Logout';
 import { connect } from 'react-redux';
+import { autoLogin } from '../../store/actions/auth';
 
 class RootRouter extends Component {
+  componentDidMount() {
+    this.props.autoLogin();
+  }
+
   render() {
     let routes = (
       <Routes>
@@ -27,11 +32,12 @@ class RootRouter extends Component {
       routes = (
         <Routes>
           <Route path="/" element={<Layout />}>
-            <Route index element={<TestList />} />
             <Route path="tests/:id" element={<WithRouter />} />
-            <Route path="auth" element={<TestList />} />
+
             <Route path="creating" element={<СreatingTests />} />
             <Route path="logout" element={<Logout />} />
+            <Route index element={<TestList />} />
+            <Route path="auth" element={<TestList />} />
           </Route>
         </Routes>
       );
@@ -46,4 +52,9 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(RootRouter);
+function mapDispatchToProps(dispatch) {
+  return {
+    autoLogin: () => dispatch(autoLogin()),
+  };
+}
+export default connect(mapStateToProps, mapDispatchToProps)(RootRouter);

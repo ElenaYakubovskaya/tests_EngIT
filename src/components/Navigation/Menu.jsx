@@ -32,8 +32,8 @@ const StyledMenu = styled.nav`
   }
 
   img {
-    width: 55%;
-    height: 10%;
+    width: 35%;
+    height: 7%;
     margin: 0 auto 50px;
   }
 `;
@@ -45,16 +45,16 @@ const Menu = ({ open, setOpen }) => {
       <Link
         style={{ textDecoration: 'none' }}
         onClick={() => setOpen(!open)}
-        to={'/'}
+        to={'auth'}
       >
-        <p>Test List</p>
+        <p>Log in</p>
       </Link>
       <Link
         style={{ textDecoration: 'none' }}
         onClick={() => setOpen(!open)}
-        to={'auth'}
+        to={'/'}
       >
-        <p>Sign in</p>
+        <p>Test List</p>
       </Link>
       <Link
         style={{ textDecoration: 'none' }}

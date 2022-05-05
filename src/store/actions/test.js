@@ -15,7 +15,6 @@ export function fetchTests() {
     dispatch(fetchTestsStart());
     try {
       const response = await axios.get('/tests.json');
-
       const tests = [];
       Object.keys(response.data).forEach((key, index) => {
         tests.push({
@@ -129,7 +128,7 @@ export function testAnswerClick(answerId) {
           dispatch(testNextQuestion(state.activeQuestion + 1));
         }
         window.clearTimeout(timeout);
-      }, 50);
+      }, 500);
     } else {
       results[question.id] = 'error';
       dispatch(testSetState({ [answerId]: 'error' }, results));

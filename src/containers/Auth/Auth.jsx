@@ -3,11 +3,12 @@ import styled from 'styled-components';
 import Button from '../../components/UI/Button';
 import Input from '../../components/UI/Input';
 import is from 'is_js';
-
 import { connect } from 'react-redux';
+import image_cat from '../../images/cat.png';
 import { auth } from '../../store/actions/auth';
+
 const StyleAuth = styled.div`
-  margin-top: 150px;
+  margin-top: 100px;
   display: flex;
   justify-content: center;
   padding-top: 100px;
@@ -184,20 +185,19 @@ class Auth extends Component {
     return (
       <StyleAuth>
         <div>
+          <img alt="IT_cat" src={image_cat} />
           <h1>Login</h1>
           <form onSubmit={this.submitHandler} className="auth">
             {this.renderInputs()}
             <div className="buttons">
               <Button
                 disabled={!this.state.isFormValid}
-                type="success"
                 onClick={this.loginHandler}
               >
                 Log in
               </Button>
               <Button
                 disabled={!this.state.isFormValid}
-                type="primary"
                 onClick={this.registerHandler}
               >
                 Sign in

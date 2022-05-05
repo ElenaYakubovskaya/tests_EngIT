@@ -30,13 +30,14 @@ const StyledModuleTest = styled.div`
   }
 
   &:success {
-    color: #ffffff8e;
-    background: #12b232;
+    background: green;
+    color: white;
   }
 
   &:error {
-    color: #ffffff8e;
-    background: #d12a2a;
+    color: #ea4b53;
+    background: red;
+    color: white;
   }
 `;
 

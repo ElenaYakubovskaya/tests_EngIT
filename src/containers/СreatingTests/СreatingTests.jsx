@@ -25,7 +25,7 @@ const StyleСreatingTests = styled.div`
   }
   h1 {
     text-align: center;
-    margin-bottom: 30px;
+    margin-bottom: 50px;
     color: #ffffff;
   }
 
@@ -41,7 +41,7 @@ const StyleСreatingTests = styled.div`
     box-sizing: border-box;
     border: 1px solid #bebebe;
     padding: 7px;
-    margin: 0 auto 2px;
+    margin: 0 auto 30px;
     width: 100%;
     outline: none;
     transition: all 300ms ease-in-out;
