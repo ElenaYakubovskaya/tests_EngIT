@@ -6,18 +6,20 @@ import { Link } from 'react-router-dom';
 
 const StyleFinishedModuleTest = styled.div`
   max-height: 100vh;
-  margin-top: 30px;
+  margin: 30px auto;
   width: 700px;
   padding: 20px;
   color: #ffffff;
   box-sizing: border-box;
-  margin: 10px 10px;
+  margin: 40px 10px;
+  display: flex;
+  align-items: center;
 
   .image {
-    margin-left: 180px;
     width: 170px;
     height: 100px;
-    margin-bottom: 40px;
+    margin-top: 40px 0;
+    margin-right: 90px;
   }
 
   div {
@@ -29,9 +31,15 @@ const StyleFinishedModuleTest = styled.div`
   .total-button {
     display: flex;
   }
+  .flex {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
 
   p {
-    margin-left: -25px;
+    margin-bottom: 20px;
+    color: #ffffff;
   }
 `;
 
@@ -46,9 +54,9 @@ const FinishedModuleTest = (props) => {
 
   return (
     <StyleFinishedModuleTest>
-      <div>
-        <img className="image" alt="IT_cat" src={image_cat} />
-        <div className="total-button">
+      <img className="image" alt="IT_cat" src={image_cat} />
+      <div className="total-button">
+        <div className="flex">
           <p>
             Total: {successCount}/{props.test.length}
           </p>

@@ -76,7 +76,7 @@ export function fetchTestsError(e) {
   };
 }
 
-export function testSetState(results, answerState) {
+export function testSetState(answerState, results) {
   return {
     type: TEST_SET_STATE,
     answerState,
@@ -131,10 +131,14 @@ export function testAnswerClick(answerId) {
           dispatch(testNextQuestion(state.activeQuestion + 1));
         }
         window.clearTimeout(timeout);
-      }, 50);
+      }, 500);
     } else {
       results[question.id] = 'error';
       dispatch(testSetState({ [answerId]: 'error' }, results));
+    }
+    dispatch(testNextQuestion(state.activeQuestion + 1));
+    if (isModuleFinished(state)) {
+      dispatch(finishTest());
     }
   };
 }

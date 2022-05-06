@@ -25,9 +25,10 @@ const StyledModuleTest = styled.div`
   }
 
   .title {
+    text-align: center;
+    margin-top: 20px;
     padding-top: 40px;
     color: #fff;
-    margin-left: 20px;
     font-size: 1.8em;
   }
 `;
@@ -45,7 +46,8 @@ class ModuleTest extends Component {
         <div className="wrapper">
           <div className="title">
             English for IT
-            <p>Module tests</p>
+            <br />
+            <strong>Module test</strong>
             {this.props.loading || !this.props.test ? (
               <Loader />
             ) : this.props.isFinished ? (
@@ -56,6 +58,7 @@ class ModuleTest extends Component {
               />
             ) : (
               <ActiveTest
+                style={{ textAlign: 'left' }}
                 answers={this.props.test[this.props.activeQuestion].answers}
                 question={this.props.test[this.props.activeQuestion].question}
                 onAnswerClick={this.props.testAnswerClick}

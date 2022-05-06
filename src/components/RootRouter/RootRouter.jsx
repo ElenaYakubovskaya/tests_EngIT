@@ -37,11 +37,11 @@ class RootRouter extends Component {
             path="/"
             element={<Layout isAuthenticated={this.props.isAuthenticated} />}
           >
+            <Route path="auth" element={<Navigate to="/" replace />} />
+            <Route path="logout" element={<Logout />} />
+            <Route path="/" exact element={<TestList />} />
             <Route path="test/:id" element={<ModuleTest {...this.props} />} />
             <Route path="creating" element={<СreatingTests />} />
-            <Route path="logout" element={<Logout />} />
-            <Route path="auth" element={<TestList />} />
-            <Route path="/" exact element={<TestList />} />
           </Route>
         </Routes>
       );
