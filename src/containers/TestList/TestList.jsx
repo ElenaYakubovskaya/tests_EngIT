@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import Loader from '../../components/UI/Loader';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchTests } from '../../store/actions/test';
@@ -74,7 +75,11 @@ class TestList extends Component {
     return (
       <StyleTestList>
         <p>List of modules</p>
-        <ul>{this.renderTests()}</ul>
+        {this.props.loading && this.props.tests.length !== 0 ? (
+          <Loader />
+        ) : (
+          <ul>{this.renderTests()}</ul>
+        )}
       </StyleTestList>
     );
   }
@@ -83,6 +88,7 @@ class TestList extends Component {
 function mapStateToProps(state) {
   return {
     tests: state.test.tests,
+    loading: state.test.loading,
   };
 }
 

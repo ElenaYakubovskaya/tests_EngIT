@@ -10,7 +10,6 @@ const StyleFinishedModuleTest = styled.div`
   width: 700px;
   padding: 20px;
   color: #ffffff;
-
   box-sizing: border-box;
   margin: 10px 10px;
 
@@ -31,18 +30,6 @@ const StyleFinishedModuleTest = styled.div`
     display: flex;
   }
 
-  .icon-clouse {
-    margin-left: 10px;
-    font-size: 27px;
-    color: red;
-  }
-
-  .icon-check {
-    margin-left: 10px;
-    font-size: 25px;
-    color: #2dc73f;
-  }
-
   p {
     margin-left: -25px;
   }
@@ -50,6 +37,7 @@ const StyleFinishedModuleTest = styled.div`
 
 const FinishedModuleTest = (props) => {
   const successCount = Object.keys(props.results).reduce((total, key) => {
+    console.log('total', total);
     if (props.results[key] === 'success') {
       total++;
     }
@@ -64,11 +52,11 @@ const FinishedModuleTest = (props) => {
           <p>
             Total: {successCount}/{props.test.length}
           </p>
-
-          <Button onClick={props.onRetry}>repeat</Button>
-
-          <Link style={{ textDecoration: 'none' }} to={'/'}>
-            <Button>test list</Button>
+          <Button onClick={props.onRetry} type="primary">
+            repeat
+          </Button>
+          <Link to={'/'}>
+            <Button type="success">test list</Button>
           </Link>
         </div>
       </div>

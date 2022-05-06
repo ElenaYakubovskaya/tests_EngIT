@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import image_cat from '../../images/cat.png';
 import { logout } from '../../store/actions/auth';
@@ -16,12 +17,13 @@ const StyledLogout = styled.div`
     margin-top: 50px;
     font-size: 2em;
     margin-bottom: 50px;
+    color: white;
   }
 
   img {
     width: 15%;
     height: 3%;
-    margin-bottom: 50px;
+    margin-bottom: -30px;
   }
 `;
 class Logout extends Component {
@@ -34,7 +36,9 @@ class Logout extends Component {
       <StyledLogout>
         <p>Thank you, come again&#128578;</p>
         <img alt="IT_cat" src={image_cat} />
-        <p>&#8592; &nbsp;Sign in</p>
+        <Link style={{ textDecoration: 'none', color: '#ffffff' }} to={'auth'}>
+          <p>Sign in</p>
+        </Link>
       </StyledLogout>
     );
   }

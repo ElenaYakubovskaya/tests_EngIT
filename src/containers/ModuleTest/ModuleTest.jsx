@@ -11,6 +11,7 @@ import {
 import { connect } from 'react-redux';
 import { WithRouter } from '../../hoc/WithRouter';
 import Loader from '../../components/UI/Loader';
+
 const StyledModuleTest = styled.div`
   .wrapper {
     padding-top: 50px;
@@ -28,16 +29,6 @@ const StyledModuleTest = styled.div`
     color: #fff;
     margin-left: 20px;
     font-size: 1.8em;
-  }
-
-  &:success {
-    background: green;
-    color: white;
-  }
-
-  &:error {
-    background: red;
-    color: white;
   }
 `;
 
@@ -87,6 +78,7 @@ function mapStateToProps(state) {
     activeQuestion: state.test.activeQuestion,
     answerState: state.test.answerState,
     test: state.test.test,
+    loading: state.test.loading,
   };
 }
 

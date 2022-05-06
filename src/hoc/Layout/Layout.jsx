@@ -18,7 +18,7 @@ const StyledLayout = styled.div`
   }
 `;
 
-const Layout = () => {
+const Layout = (props) => {
   const [open, setOpen] = React.useState(false);
   const node = React.useRef();
 
@@ -26,7 +26,11 @@ const Layout = () => {
     <StyledLayout>
       <div ref={node}>
         <Burger open={open} setOpen={setOpen} />
-        <Menu open={open} setOpen={setOpen} />
+        <Menu
+          isAuthenticated={props.isAuthenticated}
+          open={open}
+          setOpen={setOpen}
+        />
       </div>
       <div>
         <Outlet />

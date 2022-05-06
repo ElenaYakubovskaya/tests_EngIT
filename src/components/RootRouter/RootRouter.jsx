@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 
 import Layout from '../../hoc/Layout/Layout';
 import TestList from '../../containers/TestList/TestList';
@@ -20,11 +20,12 @@ class RootRouter extends Component {
     let routes = (
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route index element={<TestList />} />
           <Route path="test/:id" element={<Auth />} />
-          <Route path="auth" element={<Auth />} />
           <Route path="creating" element={<Auth />} />
           <Route path="logout" element={<Logout />} />
+          <Route path="auth" element={<Auth />} />
+          <Route path="*" element={<Navigate to="auth" replace />} />
+          <Route path="/" exact element={<TestList />} />
         </Route>
       </Routes>
     );
@@ -32,13 +33,15 @@ class RootRouter extends Component {
     if (this.props.isAuthenticated) {
       routes = (
         <Routes>
-          <Route path="/" element={<Layout />}>
+          <Route
+            path="/"
+            element={<Layout isAuthenticated={this.props.isAuthenticated} />}
+          >
             <Route path="test/:id" element={<ModuleTest {...this.props} />} />
-
             <Route path="creating" element={<СreatingTests />} />
             <Route path="logout" element={<Logout />} />
-            <Route index element={<TestList />} />
             <Route path="auth" element={<TestList />} />
+            <Route path="/" exact element={<TestList />} />
           </Route>
         </Routes>
       );

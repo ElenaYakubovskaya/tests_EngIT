@@ -131,7 +131,7 @@ export function testAnswerClick(answerId) {
           dispatch(testNextQuestion(state.activeQuestion + 1));
         }
         window.clearTimeout(timeout);
-      }, 500);
+      }, 50);
     } else {
       results[question.id] = 'error';
       dispatch(testSetState({ [answerId]: 'error' }, results));

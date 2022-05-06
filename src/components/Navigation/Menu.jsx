@@ -38,12 +38,15 @@ const StyledMenu = styled.nav`
   }
 `;
 
-const Menu = ({ open, setOpen }) => {
+const Menu = ({ open, setOpen, isAuthenticated }) => {
   return (
     <StyledMenu open={open}>
       <img alt="IT_cat" src={image_cat} />
       <Link
-        style={{ textDecoration: 'none' }}
+        style={{
+          textDecoration: 'none',
+          display: isAuthenticated ? 'none' : null,
+        }}
         onClick={() => setOpen(!open)}
         to={'auth'}
       >
@@ -64,7 +67,10 @@ const Menu = ({ open, setOpen }) => {
         <p>Creating tests</p>
       </Link>
       <Link
-        style={{ textDecoration: 'none' }}
+        style={{
+          textDecoration: 'none',
+          display: !isAuthenticated ? 'none' : null,
+        }}
         onClick={() => setOpen(!open)}
         to={'logout'}
       >
