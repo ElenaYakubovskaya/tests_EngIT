@@ -6,6 +6,7 @@ import image_cat from '../../images/cat.png';
 import { logout } from '../../store/actions/auth';
 
 const StyledLogout = styled.div`
+  margin-top: 100px;
   padding-top: 50px;
   box-sizing: border-box;
   display: flex;
