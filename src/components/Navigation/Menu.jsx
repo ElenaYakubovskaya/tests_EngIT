@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import image_cat from '../../images/cat.png';
+import Backdrop from '../UI/Backdrop';
 
 const StyledMenu = styled.nav`
   z-index: 50;
@@ -40,43 +41,46 @@ const StyledMenu = styled.nav`
 
 const Menu = ({ open, setOpen, isAuthenticated }) => {
   return (
-    <StyledMenu open={open}>
-      <img alt="IT_cat" src={image_cat} />
-      <Link
-        style={{
-          textDecoration: 'none',
-          display: isAuthenticated ? 'none' : null,
-        }}
-        onClick={() => setOpen(!open)}
-        to={'auth'}
-      >
-        <p>Log in</p>
-      </Link>
-      <Link
-        style={{ textDecoration: 'none' }}
-        onClick={() => setOpen(!open)}
-        to={'/'}
-      >
-        <p>Test List</p>
-      </Link>
-      <Link
-        style={{ textDecoration: 'none' }}
-        onClick={() => setOpen(!open)}
-        to={'creating'}
-      >
-        <p>Creating tests</p>
-      </Link>
-      <Link
-        style={{
-          textDecoration: 'none',
-          display: !isAuthenticated ? 'none' : null,
-        }}
-        onClick={() => setOpen(!open)}
-        to={'logout'}
-      >
-        <p>Exit</p>
-      </Link>
-    </StyledMenu>
+    <>
+      <StyledMenu open={open}>
+        <img alt="IT_cat" src={image_cat} />
+        <Link
+          style={{
+            textDecoration: 'none',
+            display: isAuthenticated ? 'none' : null,
+          }}
+          onClick={() => setOpen(!open)}
+          to={'auth'}
+        >
+          <p>Log in</p>
+        </Link>
+        <Link
+          style={{ textDecoration: 'none' }}
+          onClick={() => setOpen(!open)}
+          to={'/'}
+        >
+          <p>Test List</p>
+        </Link>
+        <Link
+          style={{ textDecoration: 'none' }}
+          onClick={() => setOpen(!open)}
+          to={'creating'}
+        >
+          <p>Creating tests</p>
+        </Link>
+        <Link
+          style={{
+            textDecoration: 'none',
+            display: !isAuthenticated ? 'none' : null,
+          }}
+          onClick={() => setOpen(!open)}
+          to={'logout'}
+        >
+          <p>Exit</p>
+        </Link>
+      </StyledMenu>
+      {open ? <Backdrop onClick={() => setOpen(!open)} /> : null}
+    </>
   );
 };
 
