@@ -11,6 +11,13 @@ const StyledLayout = styled.div`
   justify-content: flex-start;
   background: linear-gradient(90deg, #922e83 0%, #eccaca 100%);
 
+  .header {
+    color: #ffffff;
+    font-size: 24px;
+    font-family: cursive;
+    text-align: center;
+    padding: 10px;
+  }
   main {
     display: flex;
     flex-direction: column;
@@ -20,11 +27,11 @@ const StyledLayout = styled.div`
 
 const Layout = (props) => {
   const [open, setOpen] = React.useState(false);
-  const node = React.useRef();
 
   return (
     <StyledLayout>
-      <div ref={node}>
+      <div className="header">
+        English for IT
         <Burger open={open} setOpen={setOpen} />
         <Menu
           isAuthenticated={props.isAuthenticated}
@@ -34,7 +41,7 @@ const Layout = (props) => {
       </div>
       <div>
         <Outlet />
-      </div>
+      </div>{' '}
     </StyledLayout>
   );
 };

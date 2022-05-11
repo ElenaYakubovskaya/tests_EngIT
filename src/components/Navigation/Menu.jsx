@@ -20,7 +20,7 @@ const StyledMenu = styled.nav`
   transition: transform 0.3s ease-in-out;
 
   p {
-    padding: 25px 50px;
+    padding: 25px 40px;
     text-transform: uppercase;
     text-decoration: none;
     color: #ffffff;

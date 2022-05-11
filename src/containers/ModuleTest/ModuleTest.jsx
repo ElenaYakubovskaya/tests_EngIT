@@ -16,7 +16,7 @@ const StyledModuleTest = styled.div`
   .wrapper {
     padding-top: 50px;
     box-sizing: border-box;
-    background-color: #eccaca36;
+    background-color: inherit;
     display: flex;
     justify-content: center;
     height: 100vh;
@@ -25,7 +25,6 @@ const StyledModuleTest = styled.div`
   }
 
   .title {
-    text-align: center;
     margin-top: 20px;
     padding-top: 40px;
     color: #fff;
